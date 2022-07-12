@@ -35,12 +35,30 @@ const CountersList = () => {
         setCounters(updatedState)
     }
 
+    const handleIncrement = (id) => {
+
+        const findCount = counters.find(count => count.id === id)
+        findCount.value += 1
+
+        setCounters([...counters])
+    }
+
+    const handleDecrement = (id) => {
+        
+        const findCount = counters.find(count => count.id === id)
+        findCount.value -= 1
+
+        setCounters([...counters])
+    }
+
     return <>
         {counters.map(count => 
             <Counter 
                 key={count.id} 
                 {...count}
-                onDelete = {handleDelete}/>
+                onDelete = {handleDelete}
+                onIncrement = {handleIncrement}
+                onDecrement = {handleDecrement}/>
         )}
         <button className="btn btn-primary btn-sm m-2" onClick={handleReset}>Сброс</button>
         <button className="btn btn-primary btn-sm m-2" onClick={handleUpdate}>Обновить состояние</button>
